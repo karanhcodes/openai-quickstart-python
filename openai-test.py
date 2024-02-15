@@ -1,12 +1,19 @@
 from openai import OpenAI
 client = OpenAI()
 
-completion = client.chat.completions.create(
+response = client.chat.completions.create(
   model="gpt-3.5-turbo",
   messages=[
-    {"role": "system", "content": "You are a poetic assistant, skilled in explaining complex programming concepts with creative flair."},
-    {"role": "user", "content": "Compose a poem that explains the concept of recursion in programming."}
-  ]
+    {
+      "role": "system",
+      "content": "You will be provided with text, and your task is to translate it into emojis. Do not use any regular text. Do your best with emojis only."
+    },
+    {
+      "role": "user",
+      "content": "Artificial intelligence is a technology with great promise."
+    }
+  ],
+  temperature=0.8,
+  max_tokens=64,
+  top_p=1
 )
-
-print(completion.choices[0].message)
